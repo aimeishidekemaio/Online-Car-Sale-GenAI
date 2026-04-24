@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Registration | QMUL Car Sales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0ea5e9',
+            secondary: '#0284c7',
+            dark: '#0f172a',
+            light: '#f8fafc',
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .input-glow {
+        @apply focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300;
+      }
+      .card-shadow {
+        @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_50px_rgb(0,0,0,0.18)] transition-shadow duration-500;
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .bg-gradient-custom {
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      }
+      .animate-pulse-slow {
+        animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse {
+        0%,100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradientMove 15s ease infinite;
+      }
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .input-focus-expand {
+        transition: all 0.3s ease;
+      }
+      .input-focus-expand:focus {
+        transform: scale(1.02);
+      }
+    }
+  </style>
+</head>
+
+<body class="font-inter bg-slate-100 min-h-screen flex flex-col">
+
+  <div id="particles"
+    class="fixed inset-0 -z-10 bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50 animate-gradient"></div>
+
+  <nav class="w-full bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <i class="fa fa-car text-primary text-2xl mr-3 animate-pulse-slow"></i>
+          <span class="font-bold text-xl text-slate-800">QMUL Car Sales</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+          <a href="Homepage.html" class="text-slate-600 hover:text-primary transition-colors">Home</a>
+          <a href="Registration.html" class="text-primary font-semib0old border-b-2 border-primary pb-1">Register</a>
+          <a href="Login.html" class="text-slate-600 hover:text-primary transition-colors">Login</a>
+          <a href="Add car.html" class="text-slate-600 hover:text-primary transition-colors">Add Car</a>
+          <a href="Search Page.html" class="text-slate-600 hover:text-primary transition-colors">Search</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 flex items-center justify-center px-4 py-16">
+    <div class="w-full max-w-4xl">
+      <div
+        class="bg-white/90 backdrop-blur-md rounded-2xl card-shadow p-8 sm:p-10 relative overflow-hidden animate-float">
+        <div class="absolute -right-20 -top-20 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute -left-20 -bottom-20 w-72 h-72 bg-sky-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-custom"></div>
+
+        <div class="text-center mb-10 relative">
+          <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-800 mb-3">Seller Registration</h1>
+          <p class="text-slate-500 text-sm md:text-base">Create your seller account to start listing vehicles</p>
+        </div>
+
+        <form id="registerForm" class="grid grid-cols-1 md:grid-cols-2 gap-6 relative" onsubmit="return validateForm()">
+
+          <div class="group">
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+            <div class="relative">
+              <i class="fa fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="name"
+                class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 input-glow outline-none text-slate-800 input-focus-expand"
+                placeholder="Enter your full name">
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Residential Address</label>
+            <div class="relative">
+              <i class="fa fa-map-marker absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="address"
+                class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 input-glow outline-none text-slate-800 input-focus-expand"
+                placeholder="Enter your address">
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
+            <div class="relative">
+              <i class="fa fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="phone"
+                class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 input-glow outline-none text-slate-800 input-focus-expand"
+                placeholder="Chinese mobile number">
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+            <div class="relative">
+              <i class="fa fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="email"
+                class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 input-glow outline-none text-slate-800 input-focus-expand"
+                placeholder="example@domain.com">
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Username</label>
+            <div class="relative">
+              <i class="fa fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="username"
+                class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 input-glow outline-none text-slate-800 input-focus-expand"
+                placeholder="Minimum 6 characters">
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+            <div class="relative">
+              <i class="fa fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="password" id="password"
+                class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 input-glow outline-none text-slate-800 input-focus-expand"
+                placeholder="Minimum 6 characters">
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div class="md:col-span-2 mt-4">
+            <button type="submit"
+              class="w-full py-4 rounded-xl text-white font-semibold bg-gradient-custom hover:brightness-105 transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 text-lg">
+              <i class="fa fa-user-plus"></i>
+              <span>Create Seller Account</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-8 text-center text-slate-500 text-sm">
+        <p>Already have an account? <a href="Login.html" class="text-primary font-medium hover:underline">Login here</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-8 text-center text-slate-500 text-sm">
+    <p>© 2026 Queen Mary University of London | Hainan Campus</p>
+    <p class="mt-1">Web Technology Fundamentals • Coursework Phase A • AI Generated</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => {
+        const msg = input.parentElement.nextElementSibling;
+        if (msg) msg.classList.add('hidden');
+        input.classList.remove('border-red-500');
+      });
+    });
+
+    function validateForm() {
+      let valid = true;
+
+      const name = document.getElementById('name').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const nameRegex = /^[A-Za-z ]+$/;
+      const addrRegex = /^[A-Za-z0-9 ]+$/;
+      const phoneRegex = /^1[0-9]{10}$/;
+      const emailValid = email.includes('@') && (email.endsWith('.com') || email.endsWith('.cn'));
+
+      if (!nameRegex.test(name)) {
+        showError('name', 'Name can only contain letters and spaces');
+        valid = false;
+      }
+      if (!addrRegex.test(address)) {
+        showError('address', 'Address can only contain letters, numbers and spaces');
+        valid = false;
+      }
+      if (!phoneRegex.test(phone)) {
+        showError('phone', 'Please enter a valid 11-digit Chinese mobile number');
+        valid = false;
+      }
+      if (!emailValid) {
+        showError('email', 'Email must contain @ and end with .com or .cn');
+        valid = false;
+      }
+      if (username.length < 6) {
+        showError('username', 'Username must be at least 6 characters');
+        valid = false;
+      }
+      if (password.length < 6) {
+        showError('password', 'Password must be at least 6 characters');
+        valid = false;
+      }
+
+      if (valid) {
+        alert('✅ Registration Successful!\n\nYour seller account has been created and all validations passed.');
+        return true;
+      }
+      return false;
+    }
+
+    function showError(id, message) {
+      const input = document.getElementById(id);
+      const msg = input.parentElement.nextElementSibling;
+      input.classList.add('border-red-500');
+      msg.textContent = message;
+      msg.classList.remove('hidden');
+    }
+  </script>
+
+</body>
+
+</html>
