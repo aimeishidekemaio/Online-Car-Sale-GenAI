@@ -17,6 +17,7 @@
             background: #0b1020;
             color: #ffffff;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
@@ -29,7 +30,6 @@
             display: block;
         }
 
-        /* Navbar */
         .nav {
             position: sticky;
             top: 0;
@@ -69,6 +69,7 @@
             display: flex;
             align-items: center;
             gap: 26px;
+            margin-left: auto;
         }
 
         .nav-links a {
@@ -97,39 +98,6 @@
             width: 100%;
         }
 
-        .nav-search {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-search input {
-            padding: 10px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.15);
-            outline: none;
-            background: rgba(255,255,255,0.06);
-            color: white;
-            width: 220px;
-        }
-
-        .nav-search button {
-            padding: 10px 18px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(135deg, #28d7ff, #5a7cff);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .nav-search button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(90, 124, 255, 0.35);
-        }
-
-        /* Hero */
         .hero {
             min-height: 92vh;
             display: flex;
@@ -232,7 +200,6 @@
             font-size: 0.95rem;
         }
 
-        /* Sections */
         section {
             padding: 80px 60px;
         }
@@ -251,7 +218,6 @@
             margin: 0 auto 50px;
         }
 
-        /* About */
         .about {
             background: linear-gradient(180deg, #10172d, #0d1326);
         }
@@ -287,7 +253,6 @@
             box-shadow: 0 16px 36px rgba(0,0,0,0.35);
         }
 
-        /* Cars */
         .cars {
             background: #0b1020;
         }
@@ -353,21 +318,22 @@
             align-items: center;
         }
 
+        .single-price {
+            justify-content: flex-start;
+            margin-top: 8px;
+        }
+
         .price {
             font-size: 1.35rem;
             font-weight: bold;
             color: #28d7ff;
         }
 
-        .buy-btn {
-            padding: 10px 18px;
-            background: linear-gradient(135deg, #28d7ff, #5a7cff);
-            border-radius: 24px;
-            color: white;
-            font-weight: 600;
+        .single-price .price {
+            font-size: 1.6rem;
+            letter-spacing: 0.5px;
         }
 
-        /* Why choose us */
         .features {
             background: linear-gradient(180deg, #10172d, #0b1020);
         }
@@ -400,7 +366,6 @@
             color: #cdd7eb;
         }
 
-        /* Promotion */
         .promo {
             padding: 90px 60px;
             background:
@@ -420,18 +385,26 @@
             color: #dde7fa;
         }
 
+        .promo-actions.single-promo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 24px;
+        }
+
         .promo-banner {
             display: inline-block;
-            margin-top: 16px;
-            padding: 12px 22px;
+            margin-top: 0;
+            padding: 14px 26px;
             border-radius: 30px;
             background: rgba(40, 215, 255, 0.15);
             border: 1px solid rgba(40, 215, 255, 0.35);
             color: #8befff;
             font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 8px 24px rgba(40, 215, 255, 0.12);
         }
 
-        /* Steps */
         .steps {
             background: #0b1020;
         }
@@ -471,7 +444,6 @@
             color: #c7d2e8;
         }
 
-        /* Testimonials */
         .testimonials {
             background: linear-gradient(180deg, #10172d, #0d1326);
         }
@@ -498,7 +470,6 @@
             color: #28d7ff;
         }
 
-        /* Contact */
         .contact {
             background: #0b1020;
         }
@@ -553,7 +524,6 @@
             cursor: pointer;
         }
 
-        /* Footer */
         footer {
             background: #070b16;
             padding: 24px 60px;
@@ -562,28 +532,53 @@
             border-top: 1px solid rgba(255,255,255,0.08);
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
-            .hero,
-            .about-grid,
-            .contact-box {
-                grid-template-columns: 1fr;
-                display: grid;
-            }
-
             .nav {
                 flex-direction: column;
-                gap: 16px;
+                align-items: flex-start;
+                gap: 14px;
                 padding: 18px 24px;
             }
 
+            .nav-left {
+                width: 100%;
+            }
+
             .nav-links {
+                width: 100%;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: flex-start;
+                gap: 18px;
+                margin-left: 0;
+            }
+
+            .hero,
+            .about-grid,
+            .contact-box {
+                display: grid;
+                grid-template-columns: 1fr;
             }
 
             .hero {
-                padding: 50px 24px;
+                padding: 56px 24px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                gap: 16px;
+            }
+
+            .stat-box {
+                min-width: 140px;
+                flex: 1 1 140px;
             }
 
             section,
@@ -593,27 +588,142 @@
                 padding-right: 24px;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .car-grid,
+            .feature-grid,
+            .step-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
-        @media (max-width: 600px) {
-            .nav-search {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .nav-search input {
-                width: 100%;
-            }
-
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+                line-height: 1.2;
             }
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .car-grid,
+            .feature-grid,
+            .step-grid,
+            .testimonial-grid,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .car-card img {
+                height: 220px;
+            }
+
+            .about-card,
+            .feature-card,
+            .step-card,
+            .testimonial-card {
+                padding: 24px;
+            }
+
+            .promo h2 {
+                font-size: 2.1rem;
+            }
+
+            .promo p {
+                font-size: 0.98rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                padding: 14px 16px;
+            }
+
+            .nav-left {
+                gap: 10px;
+            }
+
+            .logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .brand-text {
+                font-size: 1.15rem;
+            }
+
+            .nav-links {
+                gap: 12px 16px;
+            }
+
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 42px 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-tag {
+                font-size: 0.82rem;
+                padding: 7px 12px;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+            }
+
+            .stat-box {
+                width: 100%;
+            }
+
+            section,
+            .promo,
+            footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .promo h2 {
+                font-size: 1.8rem;
+            }
+
+            .promo-banner {
+                width: 100%;
+                text-align: center;
+                font-size: 0.92rem;
+                padding: 12px 16px;
+            }
+
+            .contact-box {
+                padding: 22px;
             }
         }
     </style>
@@ -621,7 +731,6 @@
 
 <body onload="showWelcome()">
 
-    <!-- Required structure from your screenshot -->
     <div class="nav">
         <div class="nav-left">
             <img src="logo.jpeg" class="logo" alt="Logo">
@@ -635,27 +744,21 @@
             <a href="Add car.html">Add Car</a>
             <a href="Search Page.html">Search</a>
         </div>
-
-        <div class="nav-search">
-            <input type="text" id="searchInput" placeholder="Search Tesla, BYD, BMW i4...">
-            <button onclick="goSearch()">Search</button>
-        </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-tag">Next-Generation Electric Vehicle Marketplace</div>
             <h1>Drive the <span>Future</span> with Premium Electric Cars</h1>
             <p>
                 Welcome to VoltDrive EV, a modern marketplace dedicated to buying and selling
-                high-quality electric vehicles including Tesla, BYD, BMW, Mercedes-Benz EQ,
-                Porsche Taycan, and other advanced EV brands. We connect trusted sellers with
-                smart buyers through an elegant, efficient, and transparent platform.
+                high-quality electric vehicles including Tesla, BYD, BMW, Mercedes-Benz EQ, Porsche
+                Taycan, and other advanced EV brands. We connect trusted sellers with smart buyers
+                through an elegant, efficient, and transparent platform.
             </p>
 
             <div class="hero-buttons">
-                <a href="Search Page.html" class="btn-primary">Explore Vehicles</a>
+                <a href="#cars" class="btn-primary">Explore Vehicles</a>
                 <a href="#about" class="btn-secondary">About Our Company</a>
             </div>
 
@@ -676,7 +779,6 @@
         </div>
     </section>
 
-    <!-- About Company -->
     <section class="about" id="about">
         <h2 class="section-title">About VoltDrive EV</h2>
         <p class="section-subtitle">
@@ -705,13 +807,12 @@
             </div>
 
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1593941707882-a5bba53b3f87?auto=format&fit=crop&w=1200&q=80" alt="Electric vehicle company image">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="Electric vehicle company image">
             </div>
         </div>
     </section>
 
-    <!-- Popular EV Cars -->
-    <section class="cars">
+    <section class="cars" id="cars">
         <h2 class="section-title">Featured Electric Cars</h2>
         <p class="section-subtitle">
             Discover some of the most popular and high-performance electric cars available on our platform.
@@ -723,17 +824,16 @@
                 <div class="car-info">
                     <h3>Tesla Model S</h3>
                     <p>
-                        A premium all-electric sedan combining extreme acceleration, smart software,
-                        luxury interior, and industry-leading range.
+                        A premium all-electric sedan combining extreme acceleration, smart
+                        software, luxury interior, and industry-leading range.
                     </p>
                     <div class="car-features">
                         <span>Long Range</span>
                         <span>Autopilot</span>
                         <span>Luxury Sedan</span>
                     </div>
-                    <div class="price-row">
+                    <div class="price-row single-price">
                         <div class="price">$78,990</div>
-                        <a href="Search Page.html" class="buy-btn">View Details</a>
                     </div>
                 </div>
             </div>
@@ -751,9 +851,8 @@
                         <span>Fast Charging</span>
                         <span>Spacious</span>
                     </div>
-                    <div class="price-row">
+                    <div class="price-row single-price">
                         <div class="price">$46,990</div>
-                        <a href="Search Page.html" class="buy-btn">View Details</a>
                     </div>
                 </div>
             </div>
@@ -771,16 +870,14 @@
                         <span>High Value</span>
                         <span>Modern Design</span>
                     </div>
-                    <div class="price-row">
+                    <div class="price-row single-price">
                         <div class="price">$31,500</div>
-                        <a href="Search Page.html" class="buy-btn">View Details</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us -->
     <section class="features">
         <h2 class="section-title">Why Choose VoltDrive EV</h2>
         <p class="section-subtitle">
@@ -822,7 +919,6 @@
         </div>
     </section>
 
-    <!-- Promotion -->
     <section class="promo">
         <h2>Special EV Promotion This Month</h2>
         <p>
@@ -830,11 +926,12 @@
             or browse the latest EV deals from premium brands. Limited-time discounts and
             featured homepage exposure are available for selected sellers this month.
         </p>
-        <a href="Registration.html" class="btn-primary">Become a Seller Now</a>
-        <div class="promo-banner">Limited Offer: Featured Listing Upgrade - 30% Off</div>
+
+        <div class="promo-actions single-promo">
+            <div class="promo-banner">Limited Offer: Featured Listing Upgrade - 30% Off</div>
+        </div>
     </section>
 
-    <!-- Purchase Steps -->
     <section class="steps">
         <h2 class="section-title">How Our Platform Works</h2>
         <p class="section-subtitle">
@@ -880,7 +977,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testimonials">
         <h2 class="section-title">What Our Customers Say</h2>
         <p class="section-subtitle">
@@ -914,7 +1010,6 @@
         </div>
     </section>
 
-    <!-- Contact -->
     <section class="contact">
         <h2 class="section-title">Contact Us</h2>
         <p class="section-subtitle">
@@ -959,17 +1054,6 @@
 
         function showTip() {
             alert("You are entering the Login page. Please use your registered account to continue.");
-        }
-
-        function goSearch() {
-            const keyword = document.getElementById("searchInput").value.trim();
-
-            if (keyword === "") {
-                alert("Please enter a car brand or model to search.");
-                return;
-            }
-
-            window.location.href = "Search Page.html?keyword=" + encodeURIComponent(keyword);
         }
 
         function sendMessage(event) {
