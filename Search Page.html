@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCAR - Used Car Intelligent Search Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#36CFC9',
+            dark: '#080E1F',
+            darkCard: '#101A33',
+            techGray: '#1E2945'
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .gradient-bg { background: linear-gradient(135deg, #165DFF 0%, #36CFC9 100%); }
+      .text-gradient {
+        background: linear-gradient(135deg, #165DFF, #36CFC9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .nav-shadow { box-shadow: 0 2px 20px rgba(22, 93, 255, 0.15); }
+      .btn-active {
+        @apply bg-primary/90 text-white border border-primary/50 shadow-lg shadow-primary/30;
+      }
+      .tag-active {
+        @apply bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25;
+      }
+      .btn-press {
+        transition: all 0.2s ease;
+      }
+      .btn-press:active {
+        transform: scale(0.96);
+      }
+      .search-suggest {
+        @apply absolute left-0 right-0 top-full mt-1 bg-darkCard/95 backdrop-blur-md border border-primary/20 rounded-lg shadow-lg shadow-primary/15 z-20 max-h-60 overflow-y-auto hidden;
+      }
+      .suggest-item {
+        @apply px-4 py-2 cursor-pointer hover:bg-primary/20 text-gray-200 transition-colors;
+      }
+      .tech-card {
+        @apply bg-darkCard/80 backdrop-blur-sm border border-primary/10 rounded-xl shadow-xl shadow-primary/5 hover:shadow-primary/20 transition-all duration-300;
+      }
+      .input-tech {
+        @apply bg-techGray/60 border border-primary/20 text-gray-100 placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all;
+      }
+      .glass-nav {
+        @apply bg-dark/85 backdrop-blur-md border-b border-primary/10;
+      }
+    }
+
+    body {
+      background: linear-gradient(145deg, #080E1F 0%, #0F172A 100%);
+    }
+  </style>
+</head>
+<body class="text-gray-200 scroll-smooth min-h-screen">
+
+<button id="backTop" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full gradient-bg shadow-lg shadow-primary/30 flex items-center justify-center opacity-0 invisible transition-all duration-300 btn-press">
+  <i class="fa fa-arrow-up text-white"></i>
+</button>
+
+<header class="fixed top-0 left-0 w-full glass-nav nav-shadow z-40">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-md shadow-primary/30">UC</div>
+        <div class="text-xl font-bold text-white">UCAR<span class="text-gradient ml-1">Used Cars</span></div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Home</a>
+        <a href="#" class="nav-item btn-active px-3 py-2 rounded-lg">
+          <i class="fa fa-search mr-1"></i> Search
+        </a>
+        <a href="#" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Sell Car</a>
+        <a href="#" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Register</a>
+        <a href="#" class="px-5 py-2 rounded-lg gradient-bg text-white shadow-md shadow-primary/25 btn-press">Login</a>
+      </nav>
+      <button class="md:hidden text-2xl text-gray-300 btn-press"><i class="fa fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main class="pt-20 md:pt-24 pb-16">
+  <section class="tech-card py-8 rounded-b-2xl mb-6 overflow-hidden">
+    <div class="container mx-auto px-4">
+      <h1 class="text-2xl font-bold text-center mb-8 text-white">Find Your <span class="text-gradient">Ideal Car</span></h1>
+      
+      <div class="max-w-4xl mx-auto relative" id="searchWrap">
+        <div class="relative flex items-center">
+          <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Enter model, brand, license plate, keywords" 
+            class="w-full h-14 px-5 pr-14 rounded-xl input-tech text-lg transition-all"
+          >
+          <button id="clearBtn" class="absolute right-16 text-gray-400 hover:text-red-400 text-xl hidden btn-press">
+            <i class="fa fa-times-circle"></i>
+          </button>
+          <button class="absolute right-0 h-full px-6 gradient-bg text-white rounded-r-xl font-medium shadow-md shadow-primary/30 btn-press">
+            <i class="fa fa-search mr-2"></i>Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 mb-6">
+    <div class="tech-card p-5">
+      <div class="mb-5">
+        <h3 class="text-lg font-semibold mb-3 text-gray-100"><i class="fa fa-car mr-2 text-primary"></i>Brand</h3>
+        <div class="relative" id="brandWrap">
+          <input 
+            type="text" 
+            id="brandInput"
+            placeholder="Enter brand (BMW, Toyota, Tesla...)"
+            class="w-full h-12 px-4 rounded-lg input-tech transition-all"
+          >
+          <div id="brandSuggest" class="search-suggest"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4 border-t border-primary/10">
+        <div class="price-tags">
+          <h3 class="text-gray-300 font-medium mb-3">Price Range</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Under 50k</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">50k-100k</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">100k-200k</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">200k-300k</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Above 300k</span>
+          </div>
+        </div>
+        <div class="year-tags">
+          <h3 class="text-gray-300 font-medium mb-3">Registered Year</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Like New</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Within 1 Year</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">1-3 Years</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">3-5 Years</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Over 5 Years</span>
+          </div>
+        </div>
+        <div class="mile-tags">
+          <h3 class="text-gray-300 font-medium mb-3">Mileage</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Under 10k km</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">10k-30k km</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">30k-50k km</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">50k-100k km</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-gray-300 font-medium mb-3">Car Source</h3>
+          <select class="w-full h-10 px-3 rounded input-tech text-sm">
+            <option>All Cars</option>
+            <option>Private Seller</option>
+            <option>Dealer</option>
+            <option>Certified Used Car</option>
+            <option>Nearly New</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 mt-4 border-t border-primary/10">
+        <div>
+          <h3 class="text-gray-300 font-medium mb-3">Color</h3>
+          <div class="relative" id="colorWrap">
+            <input 
+              type="text" 
+              id="colorInput"
+              placeholder="Enter color"
+              class="w-full h-10 px-3 rounded input-tech text-sm"
+            >
+            <div id="colorSuggest" class="search-suggest"></div>
+          </div>
+        </div>
+        <div class="transfer-tags">
+          <h3 class="text-gray-300 font-medium mb-3">Transfers</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">0 Times</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">1 Time</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Multiple</span>
+          </div>
+        </div>
+        <div class="source-tags">
+          <h3 class="text-gray-300 font-medium mb-3">Owner Type</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Private</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Dealer</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">4S Trade-in</span>
+          </div>
+        </div>
+        <div class="pay-tags">
+          <h3 class="text-gray-300 font-medium mb-3">Payment</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Installment</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Full Payment</span>
+            <span class="px-3 py-1 bg-techGray/60 border border-primary/10 rounded text-sm cursor-pointer btn-press hover:border-primary/30">Trade-in</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 mb-6">
+    <div class="tech-card p-4 flex flex-col md:flex-row justify-between items-center">
+      <div class="text-lg text-gray-200">Total <span class="text-gradient font-bold">2,865</span> Quality Used Cars</div>
+      <div class="flex items-center gap-3 mt-3 md:mt-0">
+        <span class="text-gray-300">Sort:</span>
+        <select class="h-10 px-3 rounded input-tech">
+          <option>Recommended</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Latest</option>
+          <option>Lowest Mileage</option>
+        </select>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const brandList = [
+    "All Brands","BMW","Benz","Audi","Toyota","Honda","Volkswagen","Tesla",
+    "BYD","Li Auto","NIO","XPeng","Luxury","Joint Venture","Chinese Brand","New Energy"
+  ];
+  const brandInput = document.getElementById('brandInput');
+  const brandSuggest = document.getElementById('brandSuggest');
+  const brandWrap = document.getElementById('brandWrap');
+
+  brandInput.addEventListener('input', () => {
+    const val = brandInput.value.trim().toLowerCase();
+    brandSuggest.innerHTML = '';
+    if (!val) return brandSuggest.classList.add('hidden');
+    const matched = brandList.filter(item => item.toLowerCase().includes(val));
+    if(matched.length === 0) return brandSuggest.classList.add('hidden');
+    matched.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'suggest-item';
+      div.textContent = item;
+      div.onclick = () => {
+        brandInput.value = item;
+        brandSuggest.classList.add('hidden');
+      };
+      brandSuggest.appendChild(div);
+    });
+    brandSuggest.classList.remove('hidden');
+  });
+  brandInput.addEventListener('blur', () => setTimeout(()=>brandSuggest.classList.add('hidden'),200));
+  brandInput.addEventListener('focus', ()=>brandInput.dispatchEvent(new Event('input')));
+  document.addEventListener('click',e=>{
+    if(!brandWrap.contains(e.target)) brandSuggest.classList.add('hidden');
+  });
+
+  const colorList = ["All Colors","White","Black","Gray","Silver","Red","Blue","Green","Yellow","Brown","Orange","Purple"];
+  const colorInput = document.getElementById('colorInput');
+  const colorSuggest = document.getElementById('colorSuggest');
+  const colorWrap = document.getElementById('colorWrap');
+
+  colorInput.addEventListener('input', () => {
+    const val = colorInput.value.trim().toLowerCase();
+    colorSuggest.innerHTML = '';
+    if (!val) return colorSuggest.classList.add('hidden');
+    const matched = colorList.filter(item => item.toLowerCase().includes(val));
+    if(matched.length === 0) return colorSuggest.classList.add('hidden');
+    matched.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'suggest-item';
+      div.textContent = item;
+      div.onclick = () => {
+        colorInput.value = item;
+        colorSuggest.classList.add('hidden');
+      };
+      colorSuggest.appendChild(div);
+    });
+    colorSuggest.classList.remove('hidden');
+  });
+  colorInput.addEventListener('blur', () => setTimeout(()=>colorSuggest.classList.add('hidden'),200));
+  colorInput.addEventListener('focus', ()=>colorInput.dispatchEvent(new Event('input')));
+  document.addEventListener('click',e=>{
+    if(!colorWrap.contains(e.target)) colorSuggest.classList.add('hidden');
+  });
+
+  function bindTagClick(selector){
+    document.querySelectorAll(`${selector} span`).forEach(tag=>{
+      tag.onclick = function(){
+        document.querySelectorAll(`${selector} span`).forEach(t=>t.classList.remove('tag-active'));
+        this.classList.add('tag-active');
+      }
+    })
+  }
+  bindTagClick('.price-tags');
+  bindTagClick('.year-tags');
+  bindTagClick('.mile-tags');
+  bindTagClick('.transfer-tags');
+  bindTagClick('.source-tags');
+  bindTagClick('.pay-tags');
+
+  const searchInput = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('clearBtn');
+
+  searchInput.addEventListener('input', () => {
+    clearBtn.classList.toggle('hidden', !searchInput.value);
+  });
+  clearBtn.onclick = () => {
+    searchInput.value = '';
+    clearBtn.classList.add('hidden');
+  };
+
+  const backTop = document.getElementById('backTop');
+  window.onscroll = ()=>{
+    if(window.scrollY>300){
+      backTop.classList.remove('opacity-0','invisible');
+    }else{
+      backTop.classList.add('opacity-0','invisible');
+    }
+  }
+  backTop.onclick = ()=> window.scrollTo({top:0,behavior:'smooth'});
+</script>
+</body>
+</html>
