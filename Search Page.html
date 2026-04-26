@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UCAR - Used Car Intelligent Search Platform</title>
+  <title>VoltDrive EV - New Energy Used Electric Vehicle Platform</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
@@ -58,10 +58,23 @@
       .glass-nav {
         @apply bg-dark/85 backdrop-blur-md border-b border-primary/10;
       }
+      .mobile-menu {
+        @apply fixed inset-0 bg-dark/95 backdrop-blur-lg z-50 flex flex-col p-6 transform translate-x-full transition-transform duration-300;
+      }
+      .mobile-menu.active {
+        @apply translate-x-0;
+      }
+      .nav-btn {
+        @apply px-5 py-2 rounded-lg gradient-bg text-white hover:shadow-md hover:shadow-primary/40 hover:brightness-110 transition-all;
+      }
     }
 
     body {
       background: linear-gradient(145deg, #080E1F 0%, #0F172A 100%);
+    }
+    button:focus, a:focus, input:focus {
+      outline: none !important;
+      box-shadow: none !important;
     }
   </style>
 </head>
@@ -71,45 +84,68 @@
   <i class="fa fa-arrow-up text-white"></i>
 </button>
 
+<div id="mobileMenu" class="mobile-menu">
+  <div class="flex justify-between items-center mb-8">
+    <div class="flex items-center gap-2">
+      <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-lg">VD</div>
+      <div class="text-xl font-bold text-white">VoltDrive<span class="text-gradient ml-1">EV</span></div>
+    </div>
+    <button id="closeMenu" class="text-2xl text-gray-300 btn-press">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="flex flex-col gap-4 text-lg">
+    <a href="Homepage_AI.html" class="px-4 py-3 rounded-lg hover:bg-primary/10 text-gray-300 btn-press">Home</a>
+    <a href="#" class="px-4 py-3 rounded-lg btn-active">
+      <i class="fa fa-search mr-2"></i> Search
+    </a>
+    <a href="Add car.html" class="px-4 py-3 rounded-lg hover:bg-primary/10 text-gray-300 btn-press">Sell Car</a>
+    <a href="Login.html" class="px-4 py-3 rounded-lg hover:bg-primary/10 text-gray-300 btn-press">Login</a>
+    <a href="Registration.html" class="px-4 py-3 rounded-lg hover:bg-primary/10 text-gray-300 btn-press">Register</a>
+  </div>
+</div>
+
 <header class="fixed top-0 left-0 w-full glass-nav nav-shadow z-40">
   <div class="container mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-16 md:h-20">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-md shadow-primary/30">UC</div>
-        <div class="text-xl font-bold text-white">UCAR<span class="text-gradient ml-1">Used Cars</span></div>
+        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-md shadow-primary/30">VD</div>
+        <div class="text-xl font-bold text-white">VoltDrive<span class="text-gradient ml-1">EV</span></div>
       </div>
       <nav class="hidden md:flex items-center gap-6">
-        <a href="#" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Home</a>
+        <a href="Homepage_AI.html" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Home</a>
         <a href="#" class="nav-item btn-active px-3 py-2 rounded-lg">
           <i class="fa fa-search mr-1"></i> Search
         </a>
-        <a href="#" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Sell Car</a>
-        <a href="#" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Register</a>
-        <a href="#" class="px-5 py-2 rounded-lg gradient-bg text-white shadow-md shadow-primary/25 btn-press">Login</a>
+        <a href="Add car.html" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Sell Car</a>
+        <a href="Login.html" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Login</a>
+        <a href="Registration.html" class="nav-item px-3 py-2 rounded-lg hover:bg-primary/10 text-gray-300 btn-press transition-colors">Register</a>
       </nav>
-      <button class="md:hidden text-2xl text-gray-300 btn-press"><i class="fa fa-bars"></i></button>
+      <button id="openMenu" class="md:hidden text-2xl text-gray-300 btn-press">
+        <i class="fa fa-bars"></i>
+      </button>
     </div>
   </div>
 </header>
 
 <main class="pt-20 md:pt-24 pb-16">
-  <section class="tech-card py-8 rounded-b-2xl mb-6 overflow-hidden">
+  <section class="tech-card py-6 md:py-8 rounded-b-2xl mb-6 overflow-hidden">
     <div class="container mx-auto px-4">
-      <h1 class="text-2xl font-bold text-center mb-8 text-white">Find Your <span class="text-gradient">Ideal Car</span></h1>
+      <h1 class="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-white">Find Your Ideal <span class="text-gradient">Electric Vehicle</span></h1>
       
       <div class="max-w-4xl mx-auto relative" id="searchWrap">
         <div class="relative flex items-center">
           <input 
             type="text" 
             id="searchInput"
-            placeholder="Enter model, brand, license plate, keywords" 
-            class="w-full h-14 px-5 pr-14 rounded-xl input-tech text-lg transition-all"
+            placeholder="Enter brand, model, keyword for new energy vehicles" 
+            class="w-full h-12 md:h-14 px-4 md:px-5 pr-14 rounded-xl input-tech text-base md:text-lg transition-all"
           >
-          <button id="clearBtn" class="absolute right-16 text-gray-400 hover:text-red-400 text-xl hidden btn-press">
+          <button id="clearBtn" class="absolute right-14 md:right-16 text-gray-400 hover:text-red-400 text-lg md:text-xl hidden btn-press">
             <i class="fa fa-times-circle"></i>
           </button>
-          <button class="absolute right-0 h-full px-6 gradient-bg text-white rounded-r-xl font-medium shadow-md shadow-primary/30 btn-press">
-            <i class="fa fa-search mr-2"></i>Search
+          <button class="absolute right-0 h-full px-4 md:px-6 gradient-bg text-white rounded-r-xl font-medium shadow-md shadow-primary/30 btn-press">
+            <i class="fa fa-search mr-1 md:mr-2"></i>Search
           </button>
         </div>
       </div>
@@ -117,21 +153,21 @@
   </section>
 
   <section class="container mx-auto px-4 mb-6">
-    <div class="tech-card p-5">
+    <div class="tech-card p-4 md:p-5">
       <div class="mb-5">
         <h3 class="text-lg font-semibold mb-3 text-gray-100"><i class="fa fa-car mr-2 text-primary"></i>Brand</h3>
         <div class="relative" id="brandWrap">
           <input 
             type="text" 
             id="brandInput"
-            placeholder="Enter brand (BMW, Toyota, Tesla...)"
-            class="w-full h-12 px-4 rounded-lg input-tech transition-all"
+            placeholder="Enter brand (Tesla, BYD, NIO, XPeng...)"
+            class="w-full h-11 md:h-12 px-4 rounded-lg input-tech transition-all"
           >
           <div id="brandSuggest" class="search-suggest"></div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4 border-t border-primary/10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pt-4 border-t border-primary/10">
         <div class="price-tags">
           <h3 class="text-gray-300 font-medium mb-3">Price Range</h3>
           <div class="flex flex-wrap gap-2">
@@ -164,10 +200,10 @@
         <div>
           <h3 class="text-gray-300 font-medium mb-3">Car Source</h3>
           <select class="w-full h-10 px-3 rounded input-tech text-sm">
-            <option>All Cars</option>
+            <option>All EV Cars</option>
             <option>Private Seller</option>
             <option>Dealer</option>
-            <option>Certified Used Car</option>
+            <option>Certified Used EV</option>
             <option>Nearly New</option>
           </select>
         </div>
@@ -215,11 +251,11 @@
   </section>
 
   <section class="container mx-auto px-4 mb-6">
-    <div class="tech-card p-4 flex flex-col md:flex-row justify-between items-center">
-      <div class="text-lg text-gray-200">Total <span class="text-gradient font-bold">2,865</span> Quality Used Cars</div>
-      <div class="flex items-center gap-3 mt-3 md:mt-0">
+    <div class="tech-card p-4 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
+      <div class="text-base md:text-lg text-gray-200">Total <span id="carTotalNum" class="text-gradient font-bold"></span> Quality Used EVs</div>
+      <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
         <span class="text-gray-300">Sort:</span>
-        <select class="h-10 px-3 rounded input-tech">
+        <select class="h-10 px-3 rounded input-tech flex-1 md:flex-initial">
           <option>Recommended</option>
           <option>Price: Low to High</option>
           <option>Price: High to Low</option>
@@ -232,9 +268,25 @@
 </main>
 
 <script>
+  // 车辆总数变量，只需要修改这里，页面自动更新
+  const totalCarNum = 2865;
+
+  // 格式化千分位并赋值
+  document.getElementById('carTotalNum').innerText = totalCarNum.toLocaleString();
+
+  const mobileMenu = document.getElementById('mobileMenu');
+  const openMenu = document.getElementById('openMenu');
+  const closeMenu = document.getElementById('closeMenu');
+
+  openMenu.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+  });
+  closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+  });
+
   const brandList = [
-    "All Brands","BMW","Benz","Audi","Toyota","Honda","Volkswagen","Tesla",
-    "BYD","Li Auto","NIO","XPeng","Luxury","Joint Venture","Chinese Brand","New Energy"
+    "All Brands","Tesla","BYD","NIO","XPeng","Li Auto","Audi","BMW","Benz","Toyota","Honda","New Energy"
   ];
   const brandInput = document.getElementById('brandInput');
   const brandSuggest = document.getElementById('brandSuggest');
