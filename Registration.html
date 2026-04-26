@@ -540,16 +540,17 @@
 
           <div>
             <label class="block text-sm font-semibold mb-2" style="color:rgba(255,255,255,0.85)">
-              Full Name <span style="color:#FF4D6D">*</span>
+              Username <span style="color:#FF4D6D">*</span>
             </label>
             <div class="relative">
-              <i class="fa fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-sm"
+              <i class="fa fa-id-card absolute left-3.5 top-1/2 -translate-y-1/2 text-sm"
                 style="color:rgba(255,255,255,0.3)"></i>
-              <input type="text" id="name" class="form-input" placeholder="e.g. John Smith" autocomplete="name" />
+              <input type="text" id="username" class="form-input" placeholder="e.g. johnsmith123"
+                autocomplete="username" />
             </div>
-            <p id="name-err" class="hidden mt-1.5 text-xs" style="color:#FF6B85">
+            <p id="username-err" class="hidden mt-1.5 text-xs" style="color:#FF6B85">
               <i class="fa fa-exclamation-circle"></i>
-              姓名只能包含字母和空格 / Letters &amp; spaces only
+              用户名至少6位字母数字 / Min 6 alphanumeric characters
             </p>
           </div>
 
@@ -804,9 +805,9 @@
 
     const FIELDS = [
       {
-        id: 'name',
-        errId: 'name-err',
-        test: v => /^[A-Za-z\s]{2,}$/.test(v.trim()),
+        id: 'username',
+        errId: 'username-err',
+        test: v => /^[A-Za-z0-9]{6,}$/.test(v.trim()),
       },
       {
         id: 'addr',
@@ -928,7 +929,6 @@
       btn.disabled = !enabled;
 
       if (enabled) {
-        btn.className = btn.className.replace('btn-locked', 'btn-unlocked');
         btn.classList.remove('btn-locked');
         btn.classList.add('btn-unlocked');
         icon.className = 'fa fa-rocket text-sm';
@@ -1019,7 +1019,7 @@
 
       if (!allOk) return;
 
-      const name = document.getElementById('name').value.trim();
+      const name = document.getElementById('username').value.trim();
       document.getElementById('modalName').textContent =
         `Hello, ${name}! Your seller account is ready.`;
 
