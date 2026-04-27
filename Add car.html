@@ -15,9 +15,6 @@
             font-family: "Poppins",sans-serif;
         }
 
-        /* ===================== */
-        /* 🌈 原背景（完全保留） */
-        /* ===================== */
         body {
             min-height: 100vh;
             display: flex;
@@ -28,7 +25,6 @@
             padding-top: 80px;
         }
 
-            /* 柔光 */
             body::before {
                 content: "";
                 position: absolute;
@@ -40,9 +36,6 @@
                 filter: blur(60px);
             }
 
-        /* ===================== */
-        /* 🧭 NAVBAR（增强版） */
-        /* ===================== */
         .navbar {
             position: fixed;
             top: 0;
@@ -58,7 +51,6 @@
             z-index: 999;
         }
 
-            /* ✨ 顶部流光线 */
             .navbar::after {
                 content: "";
                 position: absolute;
@@ -94,7 +86,6 @@
                 transition: 0.35s;
             }
 
-                /* ✨ hover光线 */
                 .nav a::before {
                     content: "";
                     position: absolute;
@@ -117,7 +108,6 @@
                         width: 100%;
                     }
 
-                /* 当前页 */
                 .nav a.active {
                     color: #00c6ff;
                 }
@@ -127,9 +117,6 @@
                         height: 3px;
                     }
 
-        /* ===================== */
-        /* 📦 原容器（完全保留） */
-        /* ===================== */
         .container {
             width: 980px;
             display: flex;
@@ -140,7 +127,6 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.35);
         }
 
-        /* 左 */
         .left {
             width: 45%;
             display: flex;
@@ -196,7 +182,6 @@
                 background: rgba(255,255,255,0.35);
             }
 
-        /* 右 */
         .right {
             width: 55%;
             padding: 45px;
@@ -207,7 +192,6 @@
                 margin-bottom: 15px;
             }
 
-        /* 进度条增强 */
         .progress {
             height: 8px;
             background: rgba(255,255,255,0.2);
@@ -295,9 +279,6 @@
                 box-shadow: 0 12px 25px rgba(0,0,0,0.25);
             }
 
-        /* ===================== */
-        /* 🍞 Toast Ultimate */
-        /* ===================== */
         .toast {
             position: fixed;
             top: 90px;
@@ -324,7 +305,6 @@
                 transform: translateY(0) scale(1);
             }
 
-            /* 彩色状态条 */
             .toast.success {
                 border-left: 4px solid #00ffae;
             }
@@ -333,7 +313,6 @@
                 border-left: 4px solid #ff6b6b;
             }
 
-            /* 轻微发光 */
             .toast.success {
                 box-shadow: 0 0 15px rgba(0,255,174,0.3);
             }
@@ -342,7 +321,6 @@
                 box-shadow: 0 0 15px rgba(255,107,107,0.3);
             }
 
-        /* 响应式 */
         @media(max-width:1024px) {
             .container {
                 flex-direction: column;
@@ -363,11 +341,9 @@
 </head>
 
 <body>
-
-    <!-- NAV -->
     <div class="navbar">
         <div class="nav">
-            <a href="Homepage.html">Homepage</a>
+            <a href="Homepage_AI.html.html">Homepage</a>
             <a href="Login.html">Login</a>
             <a href="Registration.html">Registration</a>
             <a href="Search Page.html">Search</a>
