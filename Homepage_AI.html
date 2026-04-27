@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltDrive EV Marketplace | Premium Electric Cars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #0b1020;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 60px;
+            background: rgba(7, 12, 28, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #28d7ff;
+            box-shadow: 0 0 18px rgba(40, 215, 255, 0.35);
+        }
+
+        .brand-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            color: #dce8ff;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #28d7ff;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #28d7ff;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 60px;
+            background:
+                linear-gradient(to right, rgba(6,10,24,0.92), rgba(6,10,24,0.55)),
+                url('https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(40, 215, 255, 0.12);
+            color: #7ce8ff;
+            border: 1px solid rgba(40, 215, 255, 0.35);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #28d7ff;
+        }
+
+        .hero p {
+            color: #d1dbef;
+            font-size: 1.08rem;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 26px;
+            border-radius: 35px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #28d7ff, #5a7cff);
+            color: white;
+            box-shadow: 0 10px 24px rgba(40, 215, 255, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .hero-stats {
+            margin-top: 36px;
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 18px 22px;
+            border-radius: 18px;
+            min-width: 150px;
+        }
+
+        .stat-box h3 {
+            color: #28d7ff;
+            font-size: 1.5rem;
+        }
+
+        .stat-box p {
+            margin: 0;
+            color: #cfd7eb;
+            font-size: 0.95rem;
+        }
+
+        section {
+            padding: 80px 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 2.4rem;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b6c2dc;
+            max-width: 760px;
+            margin: 0 auto 50px;
+        }
+
+        .about {
+            background: linear-gradient(180deg, #10172d, #0d1326);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-card {
+            background: rgba(255,255,255,0.04);
+            border-radius: 24px;
+            padding: 34px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+        }
+
+        .about-card h3 {
+            color: #28d7ff;
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+        }
+
+        .about-card p {
+            color: #d6deef;
+            margin-bottom: 16px;
+        }
+
+        .about-image img {
+            border-radius: 24px;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+        }
+
+        .cars {
+            background: #0b1020;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .car-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .car-card img {
+            height: 210px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .car-info {
+            padding: 22px;
+        }
+
+        .car-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.35rem;
+        }
+
+        .car-info p {
+            color: #c6d0e6;
+            margin-bottom: 14px;
+            font-size: 0.96rem;
+        }
+
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .car-features span {
+            background: rgba(40, 215, 255, 0.12);
+            color: #8eeeff;
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-size: 0.86rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .single-price {
+            justify-content: flex-start;
+            margin-top: 8px;
+        }
+
+        .price {
+            font-size: 1.35rem;
+            font-weight: bold;
+            color: #28d7ff;
+        }
+
+        .single-price .price {
+            font-size: 1.6rem;
+            letter-spacing: 0.5px;
+        }
+
+        .features {
+            background: linear-gradient(180deg, #10172d, #0b1020);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 28px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(40, 215, 255, 0.35);
+        }
+
+        .feature-card h3 {
+            color: #28d7ff;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #cdd7eb;
+        }
+
+        .promo {
+            padding: 90px 60px;
+            background:
+                linear-gradient(rgba(5, 10, 25, 0.78), rgba(5, 10, 25, 0.78)),
+                url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            text-align: center;
+        }
+
+        .promo h2 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+        }
+
+        .promo p {
+            max-width: 760px;
+            margin: 0 auto 26px;
+            color: #dde7fa;
+        }
+
+        .promo-actions.single-promo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 24px;
+        }
+
+        .promo-banner {
+            display: inline-block;
+            margin-top: 0;
+            padding: 14px 26px;
+            border-radius: 30px;
+            background: rgba(40, 215, 255, 0.15);
+            border: 1px solid rgba(40, 215, 255, 0.35);
+            color: #8befff;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 8px 24px rgba(40, 215, 255, 0.12);
+        }
+
+        .steps {
+            background: #0b1020;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .step-card {
+            background: rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #28d7ff, #5a7cff);
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .step-card h3 {
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .step-card p {
+            color: #c7d2e8;
+        }
+
+        .testimonials {
+            background: linear-gradient(180deg, #10172d, #0d1326);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.05);
+            padding: 26px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .testimonial-card p {
+            color: #d8e0f2;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-card h4 {
+            color: #28d7ff;
+        }
+
+        .contact {
+            background: #0b1020;
+        }
+
+        .contact-box {
+            max-width: 950px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 34px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .contact-info h3,
+        .contact-form h3 {
+            margin-bottom: 16px;
+            color: #28d7ff;
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+            color: #d7dff0;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            margin-bottom: 14px;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
+            color: white;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: none;
+            min-height: 130px;
+        }
+
+        .contact-form button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #28d7ff, #5a7cff);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #070b16;
+            padding: 24px 60px;
+            text-align: center;
+            color: #aab6d0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        @media (max-width: 992px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                padding: 18px 24px;
+            }
+
+            .nav-left {
+                width: 100%;
+            }
+
+            .nav-links {
+                width: 100%;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 18px;
+                margin-left: 0;
+            }
+
+            .hero,
+            .about-grid,
+            .contact-box {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 56px 24px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                gap: 16px;
+            }
+
+            .stat-box {
+                min-width: 140px;
+                flex: 1 1 140px;
+            }
+
+            section,
+            .promo,
+            footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .car-grid,
+            .feature-grid,
+            .step-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .car-grid,
+            .feature-grid,
+            .step-grid,
+            .testimonial-grid,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .car-card img {
+                height: 220px;
+            }
+
+            .about-card,
+            .feature-card,
+            .step-card,
+            .testimonial-card {
+                padding: 24px;
+            }
+
+            .promo h2 {
+                font-size: 2.1rem;
+            }
+
+            .promo p {
+                font-size: 0.98rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                padding: 14px 16px;
+            }
+
+            .nav-left {
+                gap: 10px;
+            }
+
+            .logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .brand-text {
+                font-size: 1.15rem;
+            }
+
+            .nav-links {
+                gap: 12px 16px;
+            }
+
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 42px 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-tag {
+                font-size: 0.82rem;
+                padding: 7px 12px;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+            }
+
+            .stat-box {
+                width: 100%;
+            }
+
+            section,
+            .promo,
+            footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .promo h2 {
+                font-size: 1.8rem;
+            }
+
+            .promo-banner {
+                width: 100%;
+                text-align: center;
+                font-size: 0.92rem;
+                padding: 12px 16px;
+            }
+
+            .contact-box {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body onload="showWelcome()">
+
+    <div class="nav">
+        <div class="nav-left">
+            <img src="logo.jpeg" class="logo" alt="Logo">
+            <div class="brand-text">VoltDrive EV</div>
+        </div>
+
+        <div class="nav-links">
+            <a href="Homepage_AI.html">Homepage</a>
+            <a href="Registration.html">Registration</a>
+            <a href="Login.html" onclick="showTip()">Log in</a>
+            <a href="Add car.html">Add Car</a>
+            <a href="Search Page.html">Search</a>
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-tag">Next-Generation Electric Vehicle Marketplace</div>
+            <h1>Drive the <span>Future</span> with Premium Electric Cars</h1>
+            <p>
+                Welcome to VoltDrive EV, a modern marketplace dedicated to buying and selling
+                high-quality electric vehicles including Tesla, BYD, BMW, Mercedes-Benz EQ, Porsche
+                Taycan, and other advanced EV brands. We connect trusted sellers with smart buyers
+                through an elegant, efficient, and transparent platform.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#cars" class="btn-primary">Explore Vehicles</a>
+                <a href="#about" class="btn-secondary">About Our Company</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <h3>5,000+</h3>
+                    <p>Electric cars listed</p>
+                </div>
+                <div class="stat-box">
+                    <h3>98%</h3>
+                    <p>Customer satisfaction</p>
+                </div>
+                <div class="stat-box">
+                    <h3>24/7</h3>
+                    <p>Online support service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2 class="section-title">About VoltDrive EV</h2>
+        <p class="section-subtitle">
+            We are a forward-looking electric vehicle marketplace committed to sustainable mobility,
+            advanced technology, and premium customer experience.
+        </p>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Who We Are</h3>
+                <p>
+                    VoltDrive EV is a professional online platform specializing in the sale and
+                    promotion of electric vehicles. Our mission is to make EV ownership more
+                    accessible, trustworthy, and exciting for modern consumers.
+                </p>
+                <p>
+                    We partner with verified sellers and provide a clean digital experience for
+                    browsing, comparing, and purchasing electric cars. Whether you are looking
+                    for a Tesla Model 3, Tesla Model Y, BYD Seal, BMW iX, or a luxury EV,
+                    our marketplace is designed to help you make the right choice.
+                </p>
+                <p>
+                    Beyond vehicle listings, we promote a greener lifestyle. We believe the future
+                    of transportation is electric, intelligent, connected, and sustainable.
+                </p>
+            </div>
+
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="Electric vehicle company image">
+            </div>
+        </div>
+    </section>
+
+    <section class="cars" id="cars">
+        <h2 class="section-title">Featured Electric Cars</h2>
+        <p class="section-subtitle">
+            Discover some of the most popular and high-performance electric cars available on our platform.
+        </p>
+
+        <div class="car-grid">
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=80" alt="Tesla Model S">
+                <div class="car-info">
+                    <h3>Tesla Model S</h3>
+                    <p>
+                        A premium all-electric sedan combining extreme acceleration, smart
+                        software, luxury interior, and industry-leading range.
+                    </p>
+                    <div class="car-features">
+                        <span>Long Range</span>
+                        <span>Autopilot</span>
+                        <span>Luxury Sedan</span>
+                    </div>
+                    <div class="price-row single-price">
+                        <div class="price">$78,990</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=80" alt="Tesla Model Y">
+                <div class="car-info">
+                    <h3>Tesla Model Y</h3>
+                    <p>
+                        A practical and stylish electric SUV perfect for families, city driving,
+                        and long-distance journeys with advanced safety features.
+                    </p>
+                    <div class="car-features">
+                        <span>Family SUV</span>
+                        <span>Fast Charging</span>
+                        <span>Spacious</span>
+                    </div>
+                    <div class="price-row single-price">
+                        <div class="price">$46,990</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80" alt="BYD Seal">
+                <div class="car-info">
+                    <h3>BYD Seal</h3>
+                    <p>
+                        A modern EV with competitive range, impressive battery technology,
+                        and exceptional value for drivers seeking innovation and affordability.
+                    </p>
+                    <div class="car-features">
+                        <span>Smart Battery</span>
+                        <span>High Value</span>
+                        <span>Modern Design</span>
+                    </div>
+                    <div class="price-row single-price">
+                        <div class="price">$31,500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Why Choose VoltDrive EV</h2>
+        <p class="section-subtitle">
+            Our platform is built to offer security, innovation, convenience, and a premium user journey.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Verified Sellers</h3>
+                <p>
+                    Every seller goes through a registration and review process, ensuring a more
+                    trustworthy vehicle marketplace.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Smart Search Experience</h3>
+                <p>
+                    Buyers can quickly find ideal electric vehicles using advanced search,
+                    filters, and category-based discovery.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Premium EV Selection</h3>
+                <p>
+                    From Tesla to emerging EV innovators, we showcase vehicles that represent
+                    the newest era of automotive technology.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Clean & Modern Design</h3>
+                <p>
+                    Our website provides an elegant English-language interface designed for
+                    clarity, speed, and professional presentation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo">
+        <h2>Special EV Promotion This Month</h2>
+        <p>
+            Join the electric revolution today. Register as a seller, list your electric vehicle,
+            or browse the latest EV deals from premium brands. Limited-time discounts and
+            featured homepage exposure are available for selected sellers this month.
+        </p>
+
+        <div class="promo-actions single-promo">
+            <div class="promo-banner">Limited Offer: Featured Listing Upgrade - 30% Off</div>
+        </div>
+    </section>
+
+    <section class="steps">
+        <h2 class="section-title">How Our Platform Works</h2>
+        <p class="section-subtitle">
+            A clear and efficient process for both buyers and sellers in the electric car market.
+        </p>
+
+        <div class="step-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Browse the Homepage</h3>
+                <p>
+                    Explore featured electric vehicles, company highlights, and promotional offers
+                    directly from our homepage.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Register as a Seller</h3>
+                <p>
+                    Create an account through the registration page and complete your seller profile
+                    for verification.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Publish Vehicle Information</h3>
+                <p>
+                    Add detailed car information including brand, model, price, battery range,
+                    and vehicle images.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Search and Connect</h3>
+                <p>
+                    Buyers search for electric cars, compare listings, and contact sellers directly
+                    through the platform.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-subtitle">
+            Real feedback from users who trust VoltDrive EV for their electric vehicle journey.
+        </p>
+
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>
+                    “The website looks premium and professional. I found my Tesla Model Y quickly,
+                    and the seller information was clear and reliable.”
+                </p>
+                <h4>— Daniel Carter</h4>
+            </div>
+
+            <div class="testimonial-card">
+                <p>
+                    “VoltDrive EV makes electric car shopping simple and modern. The homepage gave
+                    me a strong first impression and helped me trust the platform immediately.”
+                </p>
+                <h4>— Sophia Lee</h4>
+            </div>
+
+            <div class="testimonial-card">
+                <p>
+                    “As a seller, I love how elegant the platform is. It feels like a real premium
+                    EV company rather than just a simple student project.”
+                </p>
+                <h4>— Michael Brown</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">
+            Get in touch with our EV sales team for more information, seller support, or business cooperation.
+        </p>
+
+        <div class="contact-box">
+            <div class="contact-info">
+                <h3>Company Information</h3>
+                <p><strong>Company Name:</strong> VoltDrive EV Marketplace</p>
+                <p><strong>Email:</strong> support@voltdrive-ev.com</p>
+                <p><strong>Phone:</strong> +1 800-268-3748</p>
+                <p><strong>Address:</strong> 128 Green Mobility Avenue, Future City, CA 90001</p>
+                <p>
+                    We are committed to providing a modern, transparent, and reliable electric car
+                    marketplace for buyers and sellers worldwide.
+                </p>
+            </div>
+
+            <div class="contact-form">
+                <h3>Send a Message</h3>
+                <form onsubmit="sendMessage(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Write your message here..." required></textarea>
+                    <button type="submit">Submit Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 VoltDrive EV Marketplace. All Rights Reserved. Powering the Future of Electric Mobility.</p>
+    </footer>
+
+    <script>
+        function showWelcome() {
+            setTimeout(function () {
+                alert("Welcome to VoltDrive EV Marketplace! Explore premium electric vehicles and discover the future of driving.");
+            }, 500);
+        }
+
+        function showTip() {
+            alert("You are entering the Login page. Please use your registered account to continue.");
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            alert("Thank you for contacting VoltDrive EV. Our team will respond to you soon.");
+        }
+    </script>
+
+</body>
+</html>
